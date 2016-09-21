@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,13 +16,44 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="90y-ZA-qQs">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Gigapet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRt-1x-fgn">
+                                <rect key="frame" x="112" y="240" width="366" height="98"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="98" id="GVQ-CH-uA7"/>
+                                    <constraint firstAttribute="width" constant="366" id="HIV-18-sFY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPS-BoldMT" family="Times New Roman" pointSize="70"/>
+                                <color key="textColor" red="0.075866279819999993" green="0.4932572355" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="90y-ZA-qQs" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="9t8-19-ZRJ"/>
+                            <constraint firstAttribute="trailing" secondItem="90y-ZA-qQs" secondAttribute="trailing" id="Gh8-mN-1sp"/>
+                            <constraint firstItem="90y-ZA-qQs" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="V3x-3i-va0"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="90y-ZA-qQs" secondAttribute="bottom" id="cNP-CU-WKX"/>
+                            <constraint firstItem="PRt-1x-fgn" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="8" symbolic="YES" id="ecm-K3-Qjv"/>
+                            <constraint firstItem="PRt-1x-fgn" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qjk-k9-o4K"/>
+                            <constraint firstItem="PRt-1x-fgn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="v2K-Or-a5O"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ecm-K3-Qjv"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="174" y="369"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="bg" width="768" height="1024"/>
+    </resources>
 </document>
