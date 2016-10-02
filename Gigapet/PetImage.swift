@@ -27,7 +27,7 @@ class petImg :UIImageView{
         
         
         var CImgArray = [UIImage]()
-        for var x = 1; x<=4; x++ {
+      for x in 1..<4 {
             let img = UIImage(named:"idle (\(x))")
             CImgArray.append(img!)
         }
@@ -47,7 +47,7 @@ class petImg :UIImageView{
         
         
         var DImgArray = [UIImage]()
-        for var x = 1; x<=4; x++ {
+        for x in 1..<4 {
             let img = UIImage(named:"dead (\(x))")
             DImgArray.append(img!)
         }

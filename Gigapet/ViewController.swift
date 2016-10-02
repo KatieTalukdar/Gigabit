@@ -34,7 +34,7 @@ class ViewController: UIViewController  {
     let MAX_PENALTY = 3
     let ALPHA_DIM : CGFloat = 0.2
     let OPAQUE : CGFloat = 1.0
-    var timer : NSTimer!
+    var timer : Timer!
     var petHappy = false
     var currentValue :UInt32 = 0
     
@@ -51,29 +51,29 @@ class ViewController: UIViewController  {
         penalty1.alpha = ALPHA_DIM
         penalty2.alpha = ALPHA_DIM
         penalty3.alpha = ALPHA_DIM
-        penalty1.hidden = true
-        penalty2.hidden = true
-        penalty3.hidden = true
-        fruitImg.hidden = true
-        foodImg.hidden = true
-        heartImg.hidden = true
-        livespanel.hidden = true
-        restartBtn.hidden = true
+        penalty1.isHidden = true
+        penalty2.isHidden = true
+        penalty3.isHidden = true
+        fruitImg.isHidden = true
+        foodImg.isHidden = true
+        heartImg.isHidden = true
+        livespanel.isHidden = true
+        restartBtn.isHidden = true
         
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "itemDropped:", name: "onTargetDropped", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.itemDropped(_:)), name: NSNotification.Name(rawValue: "onTargetDropped"), object: nil)
         
      
         
         do {
-            try musicPlayer = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath:NSBundle.mainBundle().pathForResource("cave-music", ofType: "mp3")!))
-            try sfxBite = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("bite", ofType: "wav")!))
-            try sfxHeart = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("heart", ofType: "wav")!))
+            try musicPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath:Bundle.main.path(forResource: "cave-music", ofType: "mp3")!))
+            try sfxBite = AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "bite", ofType: "wav")!))
+            try sfxHeart = AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "heart", ofType: "wav")!))
             
-            try sfxSkull = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("skull", ofType: "wav")!))
+            try sfxSkull = AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "skull", ofType: "wav")!))
             
-            try sfxDeath = AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("death", ofType: "wav")!))
+            try sfxDeath = AVAudioPlayer(contentsOf: URL(fileURLWithPath: Bundle.main.path(forResource: "death", ofType: "wav")!))
             
             musicPlayer.prepareToPlay()
             musicPlayer.play()
@@ -91,23 +91,23 @@ class ViewController: UIViewController  {
     
     
     
-   @IBAction func ifCrouchSelected(sender: AnyObject) {
+   @IBAction func ifCrouchSelected(_ sender: AnyObject) {
     startTimer()
-    penalty1.hidden = false
-    penalty2.hidden = false
-    penalty3.hidden = false
-    fruitImg.hidden = false
-    foodImg.hidden = false
-    heartImg.hidden = false
-    livespanel.hidden = false
-    restartBtn.hidden = true
-        openingCreature.hidden = true
-        openingCrouch.hidden = true
-        chooseLabel.hidden = true
-        creatureImg.hidden = true
-        bg.hidden = true
-        crouchImg.hidden = false
-        tiles.hidden = false
+    penalty1.isHidden = false
+    penalty2.isHidden = false
+    penalty3.isHidden = false
+    fruitImg.isHidden = false
+    foodImg.isHidden = false
+    heartImg.isHidden = false
+    livespanel.isHidden = false
+    restartBtn.isHidden = true
+        openingCreature.isHidden = true
+        openingCrouch.isHidden = true
+        chooseLabel.isHidden = true
+        creatureImg.isHidden = true
+        bg.isHidden = true
+        crouchImg.isHidden = false
+        tiles.isHidden = false
         heartImg.dropTarget = crouchImg
         foodImg.dropTarget = crouchImg
         fruitImg.dropTarget = crouchImg
@@ -116,29 +116,29 @@ class ViewController: UIViewController  {
 
 
 
-    @IBAction func ifCreatureSelected(sender: AnyObject) {
+    @IBAction func ifCreatureSelected(_ sender: AnyObject) {
         startTimer()
-        penalty1.hidden = false
-        penalty2.hidden = false
-        penalty3.hidden = false
-        fruitImg.hidden = false
-        foodImg.hidden = false
-        heartImg.hidden = false
-        livespanel.hidden = false
-        restartBtn.hidden = true
-        openingCreature.hidden = true
-        openingCrouch.hidden = true
-        chooseLabel.hidden = true
-        creatureImg.hidden = false
-        bg.hidden = false
-        crouchImg.hidden = true
-        tiles.hidden = true
+        penalty1.isHidden = false
+        penalty2.isHidden = false
+        penalty3.isHidden = false
+        fruitImg.isHidden = false
+        foodImg.isHidden = false
+        heartImg.isHidden = false
+        livespanel.isHidden = false
+        restartBtn.isHidden = true
+        openingCreature.isHidden = true
+        openingCrouch.isHidden = true
+        chooseLabel.isHidden = true
+        creatureImg.isHidden = false
+        bg.isHidden = false
+        crouchImg.isHidden = true
+        tiles.isHidden = true
         heartImg.dropTarget = creatureImg
         foodImg.dropTarget = creatureImg
         fruitImg.dropTarget = creatureImg
     }
     
-    func itemDropped(notif : AnyObject){
+    func itemDropped(_ notif : AnyObject){
         petHappy = true
         
         if currentValue == 0 {
@@ -149,13 +149,13 @@ class ViewController: UIViewController  {
         }
         
         foodImg.alpha = ALPHA_DIM
-        foodImg.userInteractionEnabled = false
+        foodImg.isUserInteractionEnabled = false
         
         heartImg.alpha = ALPHA_DIM
-        heartImg.userInteractionEnabled = false
+        heartImg.isUserInteractionEnabled = false
         
         fruitImg.alpha = ALPHA_DIM
-        fruitImg.userInteractionEnabled = false
+        fruitImg.isUserInteractionEnabled = false
 
         startTimer()
 
@@ -166,12 +166,12 @@ class ViewController: UIViewController  {
        if timer != nil {
           timer.invalidate()
   }
-        timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "changeGameState", userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(ViewController.changeGameState), userInfo: nil, repeats: true)
     }
     
     func changeGameState(){
         if !petHappy{
-    penalties++
+    penalties += 1
             sfxSkull.play()
         
      if penalties == 1 {
@@ -196,33 +196,33 @@ class ViewController: UIViewController  {
         let rand = arc4random_uniform(3)
         if rand == 0{
             heartImg.alpha = OPAQUE
-            heartImg.userInteractionEnabled = true
+            heartImg.isUserInteractionEnabled = true
             
             foodImg.alpha = ALPHA_DIM
-            foodImg.userInteractionEnabled = false
+            foodImg.isUserInteractionEnabled = false
             
             fruitImg.alpha = ALPHA_DIM
-            fruitImg.userInteractionEnabled = false
+            fruitImg.isUserInteractionEnabled = false
         }
         if rand == 1{
             foodImg.alpha = OPAQUE
-            foodImg.userInteractionEnabled = true
+            foodImg.isUserInteractionEnabled = true
             
             heartImg.alpha = ALPHA_DIM
-            heartImg.userInteractionEnabled = false
+            heartImg.isUserInteractionEnabled = false
             
             fruitImg.alpha = ALPHA_DIM
-            fruitImg.userInteractionEnabled = false
+            fruitImg.isUserInteractionEnabled = false
         }
         if rand == 2{
             fruitImg.alpha = OPAQUE
-            fruitImg.userInteractionEnabled = true
+            fruitImg.isUserInteractionEnabled = true
             
             foodImg.alpha = ALPHA_DIM
-            foodImg.userInteractionEnabled = false
+            foodImg.isUserInteractionEnabled = false
             
             heartImg.alpha = ALPHA_DIM
-            heartImg.userInteractionEnabled = false
+            heartImg.isUserInteractionEnabled = false
         }
 
         currentValue = rand
@@ -230,28 +230,28 @@ class ViewController: UIViewController  {
     }
     
         
-    @IBAction func whenRestartPressed(sender: AnyObject) {
+    @IBAction func whenRestartPressed(_ sender: AnyObject) {
         creatureImg.PlayIdleAnimation()
         crouchImg.PlayIdleAnimation()
         penalties = 0
         penalty1.alpha = ALPHA_DIM
         penalty2.alpha = ALPHA_DIM
         penalty3.alpha = ALPHA_DIM
-        creatureImg.hidden = true
-        crouchImg.hidden = true
-        chooseLabel.hidden = false
-        openingCrouch.hidden = false
-        openingCreature.hidden = false
-        restartBtn.hidden = true
-        bg.hidden = false
-        tiles.hidden = true
-        livespanel.hidden = true
-        fruitImg.hidden = true
-        foodImg.hidden = true
-        heartImg.hidden = true
-        penalty1.hidden = true
-        penalty2.hidden = true
-        penalty3.hidden = true
+        creatureImg.isHidden = true
+        crouchImg.isHidden = true
+        chooseLabel.isHidden = false
+        openingCrouch.isHidden = false
+        openingCreature.isHidden = false
+        restartBtn.isHidden = true
+        bg.isHidden = false
+        tiles.isHidden = true
+        livespanel.isHidden = true
+        fruitImg.isHidden = true
+        foodImg.isHidden = true
+        heartImg.isHidden = true
+        penalty1.isHidden = true
+        penalty2.isHidden = true
+        penalty3.isHidden = true
         
     }
     func gameOver(){
@@ -259,7 +259,7 @@ class ViewController: UIViewController  {
             creatureImg.playDeathAnimation()
             crouchImg.playDeathAnimation()
         sfxDeath.play()
-        restartBtn.hidden = false
+        restartBtn.isHidden = false
 
     
     }

@@ -24,7 +24,7 @@ class crouchStuff : petImg {
         self.animationImages = nil
         
         var CImgArray = [UIImage]()
-        for var x = 1; x<=4; x++ {
+        for x in 1..<4 {
             let img = UIImage(named:"idle (\(x))-3")
             CImgArray.append(img!)
         }
@@ -42,7 +42,7 @@ class crouchStuff : petImg {
         
         
         var DImgArray = [UIImage]()
-        for var x = 1; x<=4; x++ {
+       for x in 1..<4{
             let img = UIImage(named:"dead (\(x))-2")
             DImgArray.append(img!)
         }
